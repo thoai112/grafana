@@ -1,0 +1,45 @@
+---
+
+- name: Create Grafana configuration directory for EFS mount
+  file:
+    path: "{{ efs_mount_dir_config }}"
+    state: directory
+    mode: '0755'
+    owner: grafana
+    group: grafana
+
+- name: Create Grafana configuration directory for local
+  file:
+    path: "/etc/grafana"
+    state: directory
+    mode: '0755'
+    group: grafana
+
+- name: Create EFS mount directory for data
+  file:
+    path: "{{ efs_mount_dir_config }}/data"
+    state: directory
+    mode: '0755'
+    owner: grafana
+    group: grafana
+- name: Create EFS mount directory for logs
+  file:
+    path: "{{ efs_mount_dir_config }}/logs"
+    state: directory
+    mode: '0755'
+    owner: grafana
+    group: grafana
+- name: Create EFS mount directory for plugins
+  file:
+    path: "{{ efs_mount_dir_config }}/plugins"
+    state: directory
+    mode: '0755'
+    owner: grafana
+    group: grafana
+- name: Create EFS mount directory for provisioning
+  file:
+    path: "{{ efs_mount_dir_config }}/provisioning"
+    state: directory
+    mode: '0755'
+    owner: grafana
+    group: grafana

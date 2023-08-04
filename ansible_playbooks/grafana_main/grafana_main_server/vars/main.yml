@@ -1,0 +1,8 @@
+---
+# vars file for grafana_main_server
+grafana_version: "9.4.3"
+s3_bucket_monitoring_config: "<bucket_name>"
+central_grafana_config: "grafana.ini"
+aws_region: "us-east-1"
+efs_mount_dir_config: /mnt/grafanaconfig
+grafana_ami: grafana_ami

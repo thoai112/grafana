@@ -1,0 +1,28 @@
+---
+
+- name: Get instance ID
+  environment:
+    AWS_REGION: "{{ aws_region }}"
+  ec2_instance_info:
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    filters:
+      "tag:Name": "amitemp_ec2"
+      "instance-state-name": "running"
+  register: ec2_info
+- name: Print EC2
+  debug:
+    var: ec2_info
+- name: Create AMI
+  environment:
+    AWS_REGION: "{{ aws_region }}"
+  ec2_ami:
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    instance_id: "{{ ec2_info.instances[0].instance_id }}"
+    name: "{{ prom_central_ami }}"
+    no_reboot: true
+  register: ami_info
+- name: Print AMI ID
+  debug:
+    var: ami_info.image_id

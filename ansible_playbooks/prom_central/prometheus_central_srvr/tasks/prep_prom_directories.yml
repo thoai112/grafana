@@ -1,0 +1,32 @@
+---
+
+- name: Create Prometheus configuration directory
+  file:
+    path: "/etc/prometheus"
+    state: directory
+    mode: '0755'
+    group: prometheus
+
+- name: Create Prometheus storage directory
+  file:
+    path: "/var/lib/prometheus"
+    state: directory
+    mode: '0755'
+    owner: prometheus
+    group: prometheus
+
+
+- name: Create EFS mount directory for config
+  file:
+    path: "{{ efs_mount_dir_config }}"
+    state: directory
+    mode: '0755'
+    owner: prometheus
+    group: prometheus
+- name: Change ownership of mount directory
+  file:
+    path: "{{ efs_mount_dir_config }}"
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+    recurse: yes

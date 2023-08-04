@@ -1,0 +1,22 @@
+
+---
+
+- name: Update Grafana service file
+  copy:
+    src: "grafana-server.service"
+    dest: "/lib/systemd/system/grafana-server.service"
+    force: yes
+
+- name: Copy provisioning folder
+  copy:
+    src: /etc/grafana/provisioning/
+    dest: "{{ efs_mount_dir_config }}/provisioning"
+    remote_src: yes
+
+- name: Change ownership of mount directory
+  file:
+    path: "{{ efs_mount_dir_config }}/provisioning"
+    owner: grafana
+    group: grafana
+    mode: '0755'
+    recurse: yes

@@ -1,0 +1,11 @@
+
+---
+
+
+- name: Copy file to efs directory
+  copy:
+    src: "/tmp/{{ central_prom_config }}"
+    dest: "{{ efs_mount_dir_config }}/{{ central_prom_config }}"
+    remote_src: yes
+    force: no
+

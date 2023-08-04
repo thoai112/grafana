@@ -1,0 +1,25 @@
+---
+# handlers file for prometheus_central_srvr
+- name: Restart prometheus
+  listen: "restart prometheus"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: prometheus
+    state: restarted
+
+- name: Reload prometheus
+  listen: "reload prometheus"
+  become: true
+  ansible.builtin.systemd:
+    name: prometheus
+    state: reloaded
+
+- name: Enable prometheus
+  listen: "enable prometheus"
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: prometheus
+    state: started
+    enabled: yes

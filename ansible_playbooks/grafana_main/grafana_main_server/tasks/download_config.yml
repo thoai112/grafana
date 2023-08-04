@@ -1,0 +1,20 @@
+
+---
+
+- name: Download grafana config file from s3
+  aws_s3:
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    bucket: "{{ s3_bucket_monitoring_config }}"
+    object: "{{ central_grafana_config }}"
+    mode: get
+    dest: "/tmp/{{ central_grafana_config }}"
+  environment:
+    AWS_REGION: "{{ aws_region }}"
+
+- name: Copy file to local directory
+  copy:
+    src: "/tmp/{{ central_grafana_config }}"
+    dest: "/etc/grafana/{{ central_grafana_config }}"
+    remote_src: yes
+

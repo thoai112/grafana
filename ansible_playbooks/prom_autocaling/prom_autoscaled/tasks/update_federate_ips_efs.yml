@@ -1,0 +1,17 @@
+
+
+# /get instances by role tag
+# get the ips
+# update local config file
+
+- name: Get system DNS
+  uri:
+    url: http://169.254.169.254/latest/meta-data/public-hostname
+    return_content: yes
+  register: public_dns
+
+- name: Add text to efs config file
+  lineinfile:
+    path: "{{ efs_mount_dir_config }}/{{ central_prom_config }}"
+    insertafter: '^static_configs:'
+    line: "      - targets: [{{ public_dns.content }}:9090]"

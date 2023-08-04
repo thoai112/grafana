@@ -1,0 +1,22 @@
+
+
+- name: Create Prometheus systemd service file
+  copy:
+    src: "files/prometheus.service"
+    dest: "/etc/systemd/system/prometheus.service"
+
+- name: Reload systemd configuration
+  systemd:
+    daemon_reload: yes
+  
+- name: Start Prometheus service
+  systemd:
+    name: prometheus
+    state: started
+    enabled: yes
+
+- name: Restart Prometheus service
+  systemd:
+    name: prometheus
+    state: restarted
+    enabled: yes

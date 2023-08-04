@@ -1,0 +1,32 @@
+---
+# tasks file for grafana_main_server
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+- name: Install utils
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apt-transport-https
+    - software-properties-common
+    - curl
+    - python3-pip
+    - nfs-common
+    - ansible
+- name: Install botocore and boto3
+  pip:
+    name:
+      - botocore
+      - boto3
+    state: present
+
+
+- include_tasks: create_grafana_user.yml
+- include_tasks: prep_grafana_directories.yml
+- include_tasks: download_config.yml
+- include_tasks: start_grafana_svc.yml
+- include_tasks: configure_grafana_svc.yml
+- include_tasks: restart_grafana_svc.yml
+- include_tasks: create_ami_grafana.yml

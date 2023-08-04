@@ -1,0 +1,12 @@
+---
+# vars file for prometheus_central_srvr
+prometheus_version: "2.42.0"
+s3_bucket_monitoring_config: "<bucket_name>"
+central_prom_config: "prometheus.yml"
+central_prom_config_dir: "/etc/prometheus"
+aws_region: "us-east-1"
+prometheus_download_name: "v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+efs_mount_dir: /mnt/centralpromdata
+efs_mount_dir_config: /mnt/centralpromconfig
+efs_file_system_id: fs-0f52d372058ae9922
+prom_central_ami: prom_central_ami

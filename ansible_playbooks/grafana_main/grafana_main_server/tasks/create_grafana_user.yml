@@ -1,0 +1,8 @@
+---
+
+- name: Create Grafana user and group
+  user:
+    name: grafana
+    state: present
+    system: true
+    shell: /bin/false

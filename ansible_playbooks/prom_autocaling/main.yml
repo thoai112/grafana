@@ -1,0 +1,5 @@
+---
+- hosts: promcentral
+  become: true
+  roles:
+    - role: './prom_autoscaled'

@@ -1,0 +1,7 @@
+---
+# vars file for prom_autoscaled
+efs_mount_dir_config: /mnt/centralpromconfig
+efs_file_system_id: fs-001cddee8871192c6
+s3_bucket_monitoring_config: "<bucket_name>"
+central_prom_config: "prometheus.yml"
+aws_region: "us-east-1"

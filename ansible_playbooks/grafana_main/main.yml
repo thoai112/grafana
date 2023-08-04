@@ -1,0 +1,5 @@
+---
+- hosts: grafanamain
+  become: true
+  roles:
+    - role: './grafana_main_server'

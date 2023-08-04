@@ -1,0 +1,66 @@
+
+
+# get all ips for role tag
+- name: Get all prom server ip
+  environment:
+    AWS_REGION: "{{ aws_region }}"
+  ec2_instance_info:
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    filters:
+      "tag:instance_role": "prometheus_central_server"
+  register: prom_instances
+
+- name: Extract IPs of EC2 instances
+  set_fact:
+    web_ips: "{{ prom_instances.instances | map(attribute='private_ip_address') | list }}"
+
+- name: Print IPs of EC2 instances
+  debug:
+    var: web_ips
+# write to a local inv file
+- name: add sections
+  lineinfile:
+    path: ./inv
+    line: "[promcentralservers]"
+- name: add ec2 ip to inv file
+  lineinfile:
+    path: ./inv
+    line: "{{ item }}"
+  loop: "{{ web_ips }}"
+- name: add vars section
+  lineinfile:
+    path: ./inv
+    line: "[promcentralservers:vars]"
+- name: add vars 1
+  lineinfile:
+    path: ./inv
+    line: "ansible_user=ubuntu"
+- name: add vars 2
+  lineinfile:
+    path: ./inv
+    line: "ansible_ssh_private_key_file=./ssh_key/id_rsa"
+- name: add vars 3
+  lineinfile:
+    path: ./inv
+    line: "ansible_ssh_common_args='-o StrictHostKeyChecking=no'"
+
+# run prom restart for all the instances
+- name: Reload systemd configuration
+  hosts: promcentralservers
+  systemd:
+    daemon_reload: yes
+  
+- name: Start Prometheus service
+  hosts: promcentralservers
+  systemd:
+    name: prometheus
+    state: started
+    enabled: yes
+
+- name: Restart Prometheus service
+  hosts: promcentralservers
+  systemd:
+    name: prometheus
+    state: restarted
+    enabled: yes

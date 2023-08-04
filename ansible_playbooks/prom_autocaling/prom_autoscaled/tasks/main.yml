@@ -1,0 +1,11 @@
+---
+# tasks file for prom_autoscaled
+
+
+- include_tasks: download_config.yml
+- include_tasks: mount_efs.yml
+- include_tasks: copy_config.yml
+- include_tasks: update_federate_ips_efs.yml
+- include_tasks: restart_local_servics.yml
+- include_tasks: config_upload_s3.yml
+- include_tasks: restart_prom_processes_asg.yml

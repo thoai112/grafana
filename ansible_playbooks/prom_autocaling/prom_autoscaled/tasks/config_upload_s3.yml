@@ -1,0 +1,14 @@
+
+
+---
+
+- name: Upload file to S3
+  aws_s3:
+    aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+    bucket: "{{ s3_bucket_monitoring_config }}"
+    object: "{{ central_prom_config }}"
+    mode: put
+    src: "{{ efs_mount_dir_config }}/{{ central_prom_config }}"
+  environment:
+    AWS_REGION: "{{ aws_region }}"

@@ -1,0 +1,8 @@
+---
+
+- name: Create Prometheus user and group
+  user:
+    name: prometheus
+    state: present
+    system: true
+    shell: /bin/false
