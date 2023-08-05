@@ -6,5 +6,5 @@ variable "primary_region"{
 
 
 variable "cntralpromconfigbucket"{
-    default="graf-20230805"
+    default="prom-20230901"
 }
