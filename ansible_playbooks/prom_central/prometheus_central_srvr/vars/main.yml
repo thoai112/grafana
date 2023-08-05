@@ -5,7 +5,7 @@ s3_bucket_monitoring_config: "prom-20230901"
 central_prom_config: "prometheus.yml"
 central_prom_config_dir: "/etc/prometheus"
 aws_region: "us-east-1"
-prometheus_download_name: "v2.42.0/prometheus-2.42.0.linux-amd64.tar.gz"
+prometheus_download_name: "v2.46.0/prometheus-2.46.0.linux-amd64.tar.gz"
 efs_mount_dir: /mnt/centralpromdata
 efs_mount_dir_config: /mnt/centralpromconfig
 efs_file_system_id: fs-0f52d372058ae9922
