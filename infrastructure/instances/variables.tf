@@ -53,7 +53,7 @@ variable "prom_ami_id" {
 }
 
 variable "graf_ami_id" {
-    default = "ami-040de71de97894608"
+    default = "ami-093031a6e6ac82356"
 }
 
 variable "primary_prom_instance_sg" {

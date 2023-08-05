@@ -1,4 +1,4 @@
-name: Run Ansible playbook to deploy API
+name: Run Ansible playbook to create prom
 
 on:
   workflow_dispatch:
@@ -13,6 +13,6 @@ jobs:
     - name: Run Ansible playbook
       id: ansible_playh
       run: |
-        cd ansible_playbooks/grafana_main/
+        cd ansible_playbooks/central_prom/
         chmod 0600 ./ssh_key/id_rsa
         ansible-playbook main.yml -i inv
