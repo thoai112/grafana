@@ -13,6 +13,6 @@ jobs:
     - name: Run Ansible playbook
       id: ansible_playh
       run: |
-        cd ansible_playbooks/central_prom/
+        cd ansible_playbooks/prom_central/
         chmod 0600 ./ssh_key/id_rsa
         ansible-playbook main.yml -i inv
