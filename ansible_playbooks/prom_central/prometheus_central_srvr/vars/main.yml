@@ -1,7 +1,7 @@
 ---
 # vars file for prometheus_central_srvr
 prometheus_version: "2.42.0"
-s3_bucket_monitoring_config: "terraform-20230702214225952800000001"
+s3_bucket_monitoring_config: "prom-20230805"
 central_prom_config: "prometheus.yml"
 central_prom_config_dir: "/etc/prometheus"
 aws_region: "us-east-1"
