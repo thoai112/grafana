@@ -1,7 +1,7 @@
 
 
 [grafanamain]
-ec2-100-24-70-240.compute-1.amazonaws.com
+ec2-35-174-12-28.compute-1.amazonaws.com
 [grafanamain:vars]
 ansible_user=ubuntu
 ansible_ssh_private_key_file=./ssh_key/id_rsa
