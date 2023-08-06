@@ -49,11 +49,11 @@ variable "primary_vpc_id" {
 
 
 variable "prom_ami_id" {
-    default = "ami-0a2949ae686df4e33"
+    default = "ami-0cb8f467994974625"
 }
 
 variable "graf_ami_id" {
-    default = "ami-093031a6e6ac82356"
+    default = "ami-03889cb338fd2e61a"
 }
 
 variable "primary_prom_instance_sg" {

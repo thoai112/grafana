@@ -36,7 +36,7 @@ resource "aws_lb" "primary_monitoring_prom_lb" {
 resource "aws_lb_target_group" "primary_monitoring_prom_lb_tg" {
   provider    = aws.primary
   name        = "primary-monitoring-prom-lb-tg"
-  port        = 8080
+  port        = 9090
   target_type = "instance"
   vpc_id      = var.primary_vpc_id
   protocol    = "HTTP"
@@ -44,7 +44,7 @@ resource "aws_lb_target_group" "primary_monitoring_prom_lb_tg" {
     enabled  = true
     interval = 10
     path     = "/"
-    port     = 8080
+    port     = 9090
     protocol = "HTTP"
     matcher  = "200-299"
   }
@@ -74,11 +74,6 @@ resource "aws_launch_configuration" "primary_monitoring_prom_lc" {
   security_groups = [var.primary_prom_instance_sg]
   iam_instance_profile    = var.asgprofile
   
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World!" > index.html
-              nohup busybox httpd -f -p 8080 &
-              EOF
 }
 
 
@@ -123,11 +118,7 @@ resource "aws_launch_configuration" "primary_monitoring_prom_node_lc" {
   instance_type = "t2.micro"
   iam_instance_profile    = var.asgprofile
   security_groups = [var.primary_prom_node_instance_sg]
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World!" > index.html
-              nohup busybox httpd -f -p 8080 &
-              EOF
+
 }
 
 
@@ -210,11 +201,7 @@ resource "aws_launch_configuration" "primary_monitoring_graf_lc" {
   iam_instance_profile    = var.asgprofile
   instance_type = "t2.micro"
   security_groups = [var.primary_graf_instance_sg]
-  user_data = <<-EOF
-              #!/bin/bash
-              echo "Hello, World!" > index.html
-              nohup busybox httpd -f -p 3000 &
-              EOF
+  
 }
 
 
@@ -265,7 +252,7 @@ resource "aws_lb" "primary_monitoring_prom_private_lb" {
 resource "aws_lb_target_group" "primary_monitoring_prom_lb_private_tg" {
   provider    = aws.primary
   name        = "primary-mng-prom-lb-priv-tg"
-  port        = 8080
+  port        = 9090
   target_type = "instance"
   vpc_id      = var.primary_vpc_id
   protocol    = "HTTP"
@@ -273,7 +260,7 @@ resource "aws_lb_target_group" "primary_monitoring_prom_lb_private_tg" {
     enabled  = true
     interval = 10
     path     = "/"
-    port     = 8080
+    port     = 9090
     protocol = "HTTP"
     matcher  = "200-299"
   }
